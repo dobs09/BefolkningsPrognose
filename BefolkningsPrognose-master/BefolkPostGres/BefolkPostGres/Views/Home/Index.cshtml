@@ -1,0 +1,552 @@
+﻿@{ ViewBag.Title = "Home Page"; }
+@using BefolkPostGres.Models
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    @*<script src="https://code.highcharts.com/stock/highstock.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/series-label.js"></script>
+        <script src="https://code.highcharts.com/modules/data.js"></script>*@
+
+</head>
+<body>
+
+    @section Scripts {
+
+        @*<script type="text/javascript">
+                window.applicationBaseUrl = @Html.Raw(HttpUtility.JavaScriptStringEncode(Url.Content("~/"), true));
+            </script>*@
+
+
+        <script>
+            $(document).ready(function () {
+                $.getJSON("@Html.Raw(@Url.Action("GetCprBefSamlet", "Home", new { Area = "alle"}))", function (data1) {
+                    $.getJSON("@Html.Raw(@Url.Action("GetPrognose", "Home", new { Area = "alle", Age = "nul"}))", function (data2) {
+
+                        const ProgSum = Object.values(data2)
+                        Array.from(ProgSum);
+                        const BefSum = Object.values(data1)
+                        Array.from(BefSum);
+
+                        //let en = data1.map(a => a._0);
+                        //let to = data1.map(a => a._1);
+                        //let tre = data1.map(a => a._02);
+                        //let fire = data1.map(a => a._35);
+                        //let fem = data1.map(a => a._616);
+                        //let seks = data1.map(a => a._1724);
+                        //let syv = data1.map(a => a._2564);
+                        //let otte = data1.map(a => a._6574);
+                        //let ni = data1.map(a => a._7584);
+                        //let ti = data1.map(a => a._85);
+                        //let elleve = data1.map(a => a.aarMaaned);
+                        //let tolv = data1.map(a => a.aarstal);
+                        //let tretten = data1.map(a => a.maaned);
+                        //let fjorten = data1.map(a => a.sum);
+
+                        var en = BefSum[0]
+                        var to = BefSum[1]
+                        var tre = BefSum[2]
+                        var fire = BefSum[3]
+                        var fem = BefSum[4]
+                        var seks = BefSum[5]
+                        var syv = BefSum[6]
+                        var otte = BefSum[7]
+                        var ni = BefSum[8]
+                        var ti = BefSum[9]
+
+
+                        Highcharts.chart('container2', {
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Befolkningsudvikling Egedal sammenlignet med prognose'
+                            },
+                            subtitle: {
+                                text: 'Fordelt på aldersgrupper'
+                            },
+                            style: {
+                                fontSize: '40px'
+                            },
+                            plotOptions: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                series: {
+                                    grouping: false,
+                                    borderWidth: 0
+                                }
+                            },
+                            legend: {
+                                enabled: false
+                            },
+
+                            xAxis: {
+                                categories: [
+                                    '0 år',
+                                    '1 år',
+                                    '0-2 år',
+                                    '3-5 år',
+                                    '6-16 år',
+                                    '17-24 år',
+                                    '25-64 år',
+                                    '65-74 år',
+                                    '75-84 år',
+                                    '85+ år'
+                                ],
+                                crosshair: true
+
+                            }
+                            ,
+                            yAxis: [{
+                                title: {
+                                    text: 'Antal borgere'
+                                },
+                                showFirstLabel: false
+
+                            }],
+
+                            series: [{
+
+                                color: 'rgb(158, 159, 163)',
+                                pointPlacement: -0.2,
+                                //linkedTo: 'main',
+                                name: 'Prognose',
+                                data: [
+                                    ['0 år', ProgSum[0]],
+                                    ['1 år', ProgSum[1]],
+                                    ['0-2 år', ProgSum[2]],
+                                    ['3-5 år', ProgSum[3]],
+                                    ['6-16 år', ProgSum[4]],
+                                    ['17-24 år', ProgSum[5]],
+                                    ['25-64 år', ProgSum[6]],
+                                    ['65-74 år', ProgSum[7]],
+                                    ['75-84 år', ProgSum[8]],
+                                    ['85 år', ProgSum[9]]
+
+                                ],
+
+                            }, {
+                                name: 'Aktuel befolkning',
+                                id: 'main',
+                                dataSorting: {
+                                    enabled: false,
+                                    matchByName: true
+                                },
+                                dataLabels: [{
+                                    enabled: true,
+                                    inside: true,
+                                    style: {
+                                        fontSize: '16px'
+                                    }
+                                }],
+                                    color: 'rgb(102, 153, 51)',
+                                    data:
+                                    [en, to, tre, fire, fem, seks, syv, otte, ni, ti]
+
+                            }],
+                            exporting: {
+                                allowHTML: true
+                            }
+                        });
+
+                    });
+
+                })
+
+            });
+
+
+        </script>
+
+        <script>
+            $(document).change("#VælgOmråde", function () {
+                //"change",
+                //var value = document.getElementById("#VælgPrognose").value;
+                var value = document.getElementById("#VælgOmråde").value;
+                //Her kommer søgefunktioner
+
+
+                //var value2 = document.getElementById("#VælgAlder").value;
+
+
+
+                $.getJSON("@Html.Raw(@Url.Action("GetCprBefSamlet", "Home"))", { Area: value }, function (data1) {
+                    $.getJSON("@Html.Raw(@Url.Action("GetPrognose", "Home"))", { Area: value }, function (data2) {
+
+                        //let BefSum = data1.map(a => a.egedal);
+                        //Array.from(data2);
+
+                        const ProgSum = Object.values(data2)
+                        Array.from(ProgSum);
+                        const BefSum = Object.values(data1)
+                        Array.from(BefSum);
+
+                        var en = BefSum[0]
+                        var to = BefSum[1]
+                        var tre = BefSum[2]
+                        var fire = BefSum[3]
+                        var fem = BefSum[4]
+                        var seks = BefSum[5]
+                        var syv = BefSum[6]
+                        var otte = BefSum[7]
+                        var ni = BefSum[8]
+                        var ti = BefSum[9]
+
+
+
+                        Highcharts.chart('container2', {
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Befolkningsudvikling Egedal sammenlignet med prognose samlet tal'
+                            },
+                            subtitle: {
+                                text: 'Alle aldersgrupper og alle distrikter'
+                            },
+                            style: {
+                                fontSize: '40px'
+                            },
+                            plotOptions: {
+                                dataLabels: {
+                                    enabled: true
+                                },
+                                series: {
+                                    grouping: false,
+                                    borderWidth: 0
+                                }
+                            },
+                            legend: {
+                                enabled: false
+                            },
+
+                            xAxis: {
+                                categories: ['0 år', '1 år', '0-2 år', '3-5 år', '6-16 år', '17-24 år', '25-64 år', '65-74 år', '75-84 år', '85+ år'],
+                                crosshair: true
+                            }
+                            ,
+                            yAxis: [{
+                                title: {
+                                    text: 'Antal borgere'
+                                },
+                                showFirstLabel: false
+                            }],
+
+                            series: [{
+
+                                color: 'rgb(158, 159, 163)',
+                                pointPlacement: -0.2,
+                                //linkedTo: 'main',
+                                name: 'Prognose',
+                                data: [
+                                    ['0 år', ProgSum[0]],
+                                    ['1 år', ProgSum[1]],
+                                    ['0-2 år', ProgSum[2]],
+                                    ['3-5 år', ProgSum[3]],
+                                    ['6-16 år', ProgSum[4]],
+                                    ['17-24 år', ProgSum[5]],
+                                    ['25-64 år', ProgSum[6]],
+                                    ['65-74 år', ProgSum[7]],
+                                    ['75-84 år', ProgSum[8]],
+                                    ['85 år', ProgSum[9]]
+
+                                ],
+
+                            }, {
+                                name: 'Aktuel befolkning',
+                                id: 'main',
+                                dataSorting: {
+                                    enabled: false,
+                                    matchByName: true
+                                },
+                                dataLabels: [{
+                                    enabled: true,
+                                    inside: true,
+                                    style: {
+                                        fontSize: '16px'
+                                    }
+                                }],
+                                color: 'rgb(102, 153, 51)',
+                                data: [en, to, tre, fire, fem, seks, syv, otte, ni, ti]
+                            }],
+                            exporting: {
+                                allowHTML: true
+                            }
+                        });
+
+                    })
+
+                })
+
+
+
+            });
+
+
+
+
+
+
+        </script>
+
+
+
+    }
+    <div style="padding: 10px;">
+        <select class="form-control" type="text" id="#VælgOmråde" style="width:150px;">
+            <option value="alle">Alle</option>
+            <option value="ølstykke">Ølstykke</option>
+            <option value="stenløse">Stenløse</option>
+            <option value="ganløse">Ganløse</option>
+            <option value="smørum">Smørum</option>
+        </select>
+    </div>
+    <div id="container2" style=" width: 800px; height: 650px; "></div>
+
+</body>
+
+
+</html>
+
+@*<script>
+
+    $(document).ready(function () {
+
+
+        $.getJSON("@Html.Raw(@Url.Action("GetAlleAldersGrupper", "Home", new { Area = "alle"}))", function (data1) {
+            $.getJSON("@Html.Raw(@Url.Action("GetPrognose", "Home", new { Area = "alle"}))", function (data2) {
+                let BefSum = data1.map(a => a.egedal);
+                Array.from(data2);
+
+                //var ener = []
+                //ener.push(parseInt(data2[0]))
+                //var toer = []
+                //toer.push(data2[1])
+                //var treer = []
+                //treer.push(parseInt(data2[2]))
+                //var firer = []
+                //firer.push(parseInt(data2[3]))
+                //var femmer = []
+                //femmer.push(parseInt(data2[4]))
+                //var sekser = []
+                //sekser.push(parseInt(data2[5]))
+                //var syver = []
+                //syver.push(parseInt(data2[6]))
+                //var otter = []
+                //otter.push(parseInt(data2[7]))
+                //var nier = []
+                //nier.push(parseInt(data2[8]))
+                //var tier = []
+                //tier.push(parseInt(data2[9]))
+                //var ellever = []
+                //ellever.push(parseInt(data2[10]))
+                //var tolver = []
+                //tolver.push(parseInt(data2[11]))
+
+                //Her hentes den "rigtige" akutelle befolkningsdata fra CPR-databasen.
+
+
+
+                Highcharts.chart('container2', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Befolkningsudvikling Egedal sammenlignet med prognose samlet tal'
+                    },
+                    subtitle: {
+                        text: 'Alle aldersgrupper og alle distrikter'
+                    },
+                    style: {
+                        fontSize: '40px'
+                    },
+                    plotOptions: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        series: {
+                            grouping: false,
+                            borderWidth: 0
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+
+                    xAxis: {
+                        categories: ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
+                        crosshair: true
+                    }
+                    ,
+                    yAxis: [{
+                        title: {
+                            text: 'Antal borgere'
+                        },
+                        showFirstLabel: false
+                    }],
+
+                    series: [{
+
+                        color: 'rgb(158, 159, 163)',
+                        pointPlacement: -0.2,
+                        //linkedTo: 'main',
+                        name: 'Prognose',
+                        data: [
+                            ['jan', data2[0]],
+                            ['feb', data2[1]],
+                            ['mar', data2[2]],
+                            ['apr', data2[3]],
+                            ['maj', data2[4]],
+                            ['jun', data2[5]],
+                            ['jul', data2[6]],
+                            ['aug', data2[7]],
+                            ['sep', data2[8]],
+                            ['okt', data2[9]],
+                            ['nov', data2[10]],
+                            ['dec', data2[11]]
+                                                ],
+                    }, {
+                        name: 'Aktuel befolkning',
+                        id: 'main',
+                        dataSorting: {
+                            enabled: false,
+                            matchByName: true
+                        },
+                        dataLabels: [{
+                            enabled: true,
+                            inside: true,
+                            style: {
+                                fontSize: '16px'
+                            }
+                        }],
+                            color: 'rgb(102, 153, 51)',
+                            data: BefSum
+                    }],
+                    exporting: {
+                        allowHTML: true
+                    }
+                });
+            })
+        })
+    });
+
+</script>
+
+<script>
+
+    $(document).change("#VælgPrognose", function () {
+        //"change",
+        var value = document.getElementById("#VælgPrognose").value;
+
+        const ProgSum = []
+        const BefSum = []
+
+
+
+        $.getJSON("@Html.Raw(@Url.Action("GetAlleAldersGrupper", "Home"))", { Area : value }, function (data1) {
+            $.getJSON("@Html.Raw(@Url.Action("GetPrognose", "Home"))", { Area : value }, function (data2) {
+
+                //Her hentes den "rigtige" akutelle befolkningsdata fra CPR-databasen.
+                let BefSum = data1.map(a => a.egedal);
+
+                Array.from(data2);
+
+                Highcharts.chart('container2', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Befolkningsudvikling Egedal sammenlignet med prognose samlet tal'
+                    },
+                    subtitle: {
+                        text: 'Alle aldersgrupper og alle distrikter'
+                    },
+                    style: {
+                        fontSize: '40px'
+                    },
+                    plotOptions: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        series: {
+                            grouping: false,
+                            borderWidth: 0
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+
+                    xAxis: {
+                        categories: ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
+                        crosshair: true
+                    }
+                    ,
+                    yAxis: [{
+                        title: {
+                            text: 'Antal borgere'
+                        },
+                        showFirstLabel: false
+                    }],
+
+                    series: [{
+
+                        color: 'rgb(158, 159, 163)',
+                        pointPlacement: -0.2,
+                        //linkedTo: 'main',
+                        name: 'Prognose',
+                        data: [['jan', data2[0]],
+                            ['feb', data2[1]],
+                            ['mar', data2[2]],
+                            ['apr', data2[3]],
+                            ['maj', data2[4]],
+                            ['jun', data2[5]],
+                            ['jul', data2[6]],
+                            ['aug', data2[7]],
+                            ['sep', data2[8]],
+                            ['okt', data2[9]],
+                            ['nov', data2[10]],
+                            ['dec', data2[11]]
+
+                        ],
+
+                    }, {
+                        name: 'Aktuel befolkning',
+                        id: 'main',
+                        dataSorting: {
+                            enabled: false,
+                            matchByName: true
+                        },
+                        dataLabels: [{
+                            enabled: true,
+                            inside: true,
+                            style: {
+                                fontSize: '16px'
+                            }
+                        }],
+                            color: 'rgb(102, 153, 51)',
+                            data: BefSum
+                    }],
+                    exporting: {
+                        allowHTML: true
+                    }
+                });
+
+            })
+
+        })
+    });
+
+
+</script>*@

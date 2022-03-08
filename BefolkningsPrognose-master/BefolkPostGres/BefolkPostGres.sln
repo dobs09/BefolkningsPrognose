@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BefolkPostGres", "BefolkPostGres\BefolkPostGres.csproj", "{735562D7-5538-48A0-A51B-16C175C72741}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{735562D7-5538-48A0-A51B-16C175C72741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{735562D7-5538-48A0-A51B-16C175C72741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{735562D7-5538-48A0-A51B-16C175C72741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{735562D7-5538-48A0-A51B-16C175C72741}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63073196-91E6-4CF9-9AF4-9A179F0976A5}
+	EndGlobalSection
+EndGlobal
