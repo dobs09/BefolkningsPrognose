@@ -154,7 +154,7 @@
                 var value = document.getElementById("#VælgOmråde").value;
                 var value1 = document.getElementById("#VælgAlder").value;
 
-        const ProgSum = []
+        //const ProgSum = []
         var BefSum = []
 
 
@@ -169,13 +169,13 @@
                         //let BefSum = data1.map(a => a.egedal);
                         //Array.from(BefSum);
 
-                        if (value1 = "alle") {
+                        if (value1 == "alle") {
                             let ener = data1.map(a => a.egedal);
                             BefSum = Array.from(ener);
                             var toer = []
                         }
                         else {
-                            const BefSum = Object.values(data1);
+                            BefSum = Object.values(data1);
                             Array.from(BefSum);
                             
                         }

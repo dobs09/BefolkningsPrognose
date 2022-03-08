@@ -267,45 +267,56 @@ namespace BefolkningPostGres.Controllers
                     .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
                     .OrderByDescending(d => d.AarMaaned).First();
                 }
-
+                if (Age == "alle")
+                {
+                    egedal1 = (
+                    from p in _egeContex.CprPrognoseSamlet2
+                    group p by p.AarMaaned into g
+                    select new
+                    {
+                        //PersonId = g.Key,
+                        egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
+                    }
+                    ).ToList();
+                }
                 //data = await _rep.GetAll();
-                else if (Age == "1")
+                else if (Age == "0")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._0).ToList();
                 }
-                else if (Age == "02")
+                else if (Age == "1")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._1).ToList();
                 }
-                else if (Age == "35")
+                else if (Age == "02")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._02).ToList();
                 }
-                else if (Age == "616")
+                else if (Age == "35")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._35).ToList();
                 }
-                else if (Age == "1724")
+                else if (Age == "616")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._616).ToList();
                 }
-                else if (Age == "2564")
+                else if (Age == "1724")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._1724).ToList();
                 }
-                else if (Age == "6574")
+                else if (Age == "2564")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._2564).ToList();
                 }
-                else if (Age == "7584")
+                else if (Age == "6574")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._6574).ToList();
                 }
-                else if (Age == "85")
+                else if (Age == "7584")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._7584).ToList();
                 }
-                else if (Age == "10")
+                else if (Age == "85")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet2.Select(item => item._85).ToList();
                 }
@@ -315,110 +326,126 @@ namespace BefolkningPostGres.Controllers
                 if (Age == null)
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3
-                    .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
-                    .OrderByDescending(d => d.AarMaaned).First();
+                                            
+                        .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
+                        .OrderByDescending(d => d.AarMaaned).First();
+                }
+                if (Age == "alle")
+                {
+                    egedal1 = (
+                    from p in _egeContex.CprPrognoseSamlet3
+                    group p by p.AarMaaned into g
+                    select new
+                    {
+                        //PersonId = g.Key,
+                        egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
+                    }
+                    ).ToList();
                 }
                 if (Age == "0")
-                {
-                    egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item.Sum).ToList();
-                }
-
-                //data = await _rep.GetAll();
-                else if (Age == "1")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._0).ToList();
                 }
-                else if (Age == "2")
+
+                //data = await _rep.GetAll();
+                else if (Age == "1")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._1).ToList();
                 }
-                else if (Age == "3")
+                else if (Age == "02")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._02).ToList();
                 }
-                else if (Age == "4")
+                else if (Age == "35")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._35).ToList();
                 }
-                else if (Age == "5")
+                else if (Age == "616")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._616).ToList();
                 }
-                else if (Age == "6")
+                else if (Age == "1724")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._1724).ToList();
                 }
-                else if (Age == "7")
+                else if (Age == "2564")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._2564).ToList();
                 }
-                else if (Age == "8")
+                else if (Age == "6574")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._6574).ToList();
                 }
-                else if (Age == "9")
+                else if (Age == "7584")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._7584).ToList();
                 }
-                else if (Age == "10")
+                else if (Age == "85")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet3.Select(item => item._85).ToList();
                 }
+                
             }
             else if (Area == "smørum")
             {
-                if (Age == null)
+                if (Age == "alle")
                 {
-                    egedal1 = _egeContex.CprPrognoseSamlet4
-                    .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
-                    .OrderByDescending(d => d.AarMaaned).First();
+                    egedal1 = (
+                   from p in _egeContex.CprPrognoseSamlet4
+                   group p by p.AarMaaned into g
+                   select new
+                   {
+                        //PersonId = g.Key,
+                        egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
+                   }
+                   ).ToList();
+                    //egedal1 = _egeContex.CprPrognoseSamlet4
+                    //.Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
+                    //.OrderByDescending(d => d.AarMaaned).First();
                 }
                 if (Age == "0")
                 {
-                    egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item.Sum).ToList();
+                    egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._0).ToList();
                 }
 
                 //data = await _rep.GetAll();
                 else if (Age == "1")
                 {
-                    egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._0).ToList();
-                }
-                else if (Age == "2")
-                {
                     egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._1).ToList();
                 }
-                else if (Age == "3")
+                else if (Age == "02")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._02).ToList();
                 }
-                else if (Age == "4")
+                else if (Age == "35")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._35).ToList();
                 }
-                else if (Age == "5")
+                else if (Age == "616")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._616).ToList();
                 }
-                else if (Age == "6")
+                else if (Age == "1724")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._1724).ToList();
                 }
-                else if (Age == "7")
+                else if (Age == "2564")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._2564).ToList();
                 }
-                else if (Age == "8")
+                else if (Age == "6574")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._6574).ToList();
                 }
-                else if (Age == "9")
+                else if (Age == "7584")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._7584).ToList();
                 }
-                else if (Age == "10")
+                else if (Age == "85")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet4.Select(item => item._85).ToList();
                 }
+                
             }
 
             return Json(egedal1);
@@ -431,14 +458,14 @@ namespace BefolkningPostGres.Controllers
             if (Age == "nul")
             {
                 
-                egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id).Where(b => b.Omraade == "alle")
+                egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle")
                     .Select(x => new { x.Alder0, x.Alder1, x.Alder02, x.Alder35, x.Alder616, x.Alder1724, x.Alder2564, x.Alder6574, x.Alder7584, x.Alder85, x.Id }).FirstOrDefault();
             }
             if (Age == "alle")
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Sum).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Sum).ToList();
 
                     //egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id).Where(b => b.Omraade == "alle")
                     //.Select(x => new { x.Alder0, x.Alder1, x.Alder02, x.Alder35, x.Alder616, x.Alder1724, x.Alder2564, x.Alder6574, x.Alder7584, x.Alder85, x.Id }).FirstOrDefault();
@@ -468,26 +495,27 @@ namespace BefolkningPostGres.Controllers
                 }
                 if (Area == "stenløse")
                 {
-                    //egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Sum).ToList();
-                    egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
-                        .Where(b => b.Omraade == "stenløse")
-                        .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
+
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Sum).ToList();
+                    //egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
+                    //    .Where(b => b.Omraade == "stenløse")
+                    //    .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
 
                 }
                 if (Area == "ganløse")
                 {
-                    //egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Sum).ToList();
-                    egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
-                        .Where(b => b.Omraade == "ganløse")
-                        .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Sum).ToList();
+                    //egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
+                    //    .Where(b => b.Omraade == "ganløse")
+                    //    .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
 
                 }
                 if (Area == "smørum")
                 {
-                    //egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Sum).ToList();
-                    egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
-                        .Where(b => b.Omraade == "smørum")
-                        .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Sum).ToList();
+                    //egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
+                    //    .Where(b => b.Omraade == "smørum")
+                    //    .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
 
                 }
             }
@@ -495,7 +523,7 @@ namespace BefolkningPostGres.Controllers
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Sum).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Sum).ToList();
 
                     //egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id).Where(b => b.Omraade == "alle")
                     //.Select(x => new { x.Alder0, x.Alder1, x.Alder02, x.Alder35, x.Alder616, x.Alder1724, x.Alder2564, x.Alder6574, x.Alder7584, x.Alder85, x.Id }).FirstOrDefault();
@@ -517,7 +545,7 @@ namespace BefolkningPostGres.Controllers
                 if (Area == "ølstykke")
                 {
                     //egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Sum).ToList();
-                    egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id)
                         .Where(b => b.Omraade == "ølstykke")
                         .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
 
@@ -525,7 +553,7 @@ namespace BefolkningPostGres.Controllers
                 if (Area == "stenløse")
                 {
                     //egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Sum).ToList();
-                    egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id)
                         .Where(b => b.Omraade == "stenløse")
                         .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
 
@@ -533,7 +561,7 @@ namespace BefolkningPostGres.Controllers
                 if (Area == "ganløse")
                 {
                     //egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Sum).ToList();
-                    egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id)
                         .Where(b => b.Omraade == "ganløse")
                         .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
 
@@ -541,7 +569,7 @@ namespace BefolkningPostGres.Controllers
                 if (Area == "smørum")
                 {
                     //egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Sum).ToList();
-                    egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id)
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id)
                         .Where(b => b.Omraade == "smørum")
                         .Select(a => new { a.Alder0, a.Alder1, a.Alder02, a.Alder35, a.Alder616, a.Alder1724, a.Alder2564, a.Alder6574, a.Alder7584, a.Alder85, a.Id }).FirstOrDefault();
 
@@ -551,26 +579,26 @@ namespace BefolkningPostGres.Controllers
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder0).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder0).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder0).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder0).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder0).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder0).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder0).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder0).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder0).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder0).ToList();
                 }
 
             }
@@ -578,234 +606,234 @@ namespace BefolkningPostGres.Controllers
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder1).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder1).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder1).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder1).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder1).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder1).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder1).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder1).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder1).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder1).ToList();
                 }
             }
             if (Age == "02")
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder02).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder02).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder02).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder02).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder02).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder02).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder02).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder02).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder02).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder02).ToList();
                 }
             }
             if (Age == "35")
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder35).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder35).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder35).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder35).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder35).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder35).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder35).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder35).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder35).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder35).ToList();
                 }
             }
             if (Age == "616")
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder616).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder616).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder616).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder616).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder616).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder616).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder616).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder616).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder616).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder616).ToList();
                 }
             }
             if (Age == "1724")
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder1724).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder1724).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder1724).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder1724).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder1724).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder1724).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder1724).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder1724).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder1724).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder1724).ToList();
                 }
             }
             if (Age == "2564")
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder2564).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder2564).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder2564).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder2564).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder2564).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder2564).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder2564).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder2564).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder2564).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder2564).ToList();
                 }
             }
             if (Age == "6574")
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder6574).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder6574).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder6574).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder6574).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder6574).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder6574).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder6574).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder6574).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder6574).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder6574).ToList();
                 }
             }
             if (Age == "7584")
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder7584).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder7584).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder7584).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder7584).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder7584).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder7584).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder7584).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder7584).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder7584).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder7584).ToList();
                 }
             }
             if (Age == "85")
             {
                 if (Area == "alle")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "alle").Select(a => a.Alder85).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle").Select(a => a.Alder85).ToList();
 
                 }
                 if (Area == "ølstykke")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ølstykke").Select(a => a.Alder85).ToList(); ;
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ølstykke").Select(a => a.Alder85).ToList(); ;
 
                 }
                 if (Area == "stenløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "stenløse").Select(a => a.Alder85).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "stenløse").Select(a => a.Alder85).ToList();
 
                 }
                 if (Area == "ganløse")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "ganløse").Select(a => a.Alder85).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "ganløse").Select(a => a.Alder85).ToList();
                 }
                 if (Area == "smørum")
                 {
-                    egedal = _egeContex.PrognoseHardcodet.Where(b => b.Omraade == "smørum").Select(a => a.Alder85).ToList();
+                    egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "smørum").Select(a => a.Alder85).ToList();
                 }
             }
 
