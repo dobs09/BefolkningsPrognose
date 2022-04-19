@@ -26,11 +26,11 @@
 
                 const ProgSum = Object.values(data2)
                 Array.from(ProgSum);
-                //const BefSum = Object.values(data1)
-                //Array.from(BefSum);
-
-                let BefSum = data1.map(a => a.egedal);
+                const BefSum = Object.values(data1)
                 Array.from(BefSum);
+
+                //let BefSum = data1.map(a => a.egedal);
+                //Array.from(BefSum);
                 
                 var ener = []
                 //ener.push(parseInt(data2[0]))
@@ -165,20 +165,24 @@
                 //Her hentes den "rigtige" akutelle befolkningsdata fra CPR-databasen.
                         const ProgSum = Object.values(data2)
                         Array.from(ProgSum);
+                        const BefSum = Object.values(data1)
+                        Array.from(BefSum);
+                        //BefSum = Object.values(data1);
+                        //Array.from(BefSum);
+
 
                         //let BefSum = data1.map(a => a.egedal);
                         //Array.from(BefSum);
 
-                        if (value1 == "alle") {
-                            let ener = data1.map(a => a.egedal);
-                            BefSum = Array.from(ener);
-                            var toer = []
-                        }
-                        else {
-                            BefSum = Object.values(data1);
-                            Array.from(BefSum);
-                            
-                        }
+                        //if (value1 == "alle") {
+                        //    let ener = data1.map(a => a.egedal);
+                        //    BefSum = Array.from(ener);
+                        //    var toer = []
+                        //}
+                        //else {
+                        //    BefSum = Object.values(data1);
+                        //    Array.from(BefSum);                            
+                        //}
                 
 
                 

@@ -71,37 +71,28 @@ namespace BefolkningPostGres.Controllers
             {
                 if (Age == "nul")
                 {
+                    egedal1 = _egeContex.CprPrognoseSamlet.Select(a => a._02 + a._35 + a._616 + a._1724 + a._2564 + a._6574 + a._7584 + a._85).ToList();
+                                  
 
                     //egedal1 = _egeContex.CprPrognoseSamlet
                     //    .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
                     //    .OrderByDescending(d => d.AarMaaned).ToList();
 
-                    egedal1 = (
-                        from p in _egeContex.CprPrognoseSamlet
-                        group p by p.AarMaaned into g
-                        select new
-                        {
-                                                //PersonId = g.Key,
-                                                egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
-                        }
-                        ).ToList();
+                    //egedal1 = (
+                    //    from p in _egeContex.CprPrognoseSamlet                        
+                    //    group p by p.AarMaaned into g                        
+                    //    select new
+                    //    {                                                
+                    //                            egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
+                    //    }
+                    //    ).ToList();
+
                 }
                 if (Age == "alle")
                 {
 
-                    //egedal1 = _egeContex.CprPrognoseSamlet
-                    //    .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
-                    //    .OrderByDescending(d => d.AarMaaned).ToList();
+                    egedal1 = _egeContex.CprPrognoseSamlet.Select(a => a._02 + a._35 + a._616 + a._1724 + a._2564 + a._6574 + a._7584 + a._85).ToList();
 
-                    egedal1 = (
-                        from p in _egeContex.CprPrognoseSamlet
-                        group p by p.AarMaaned into g
-                        select new
-                        {
-                            //PersonId = g.Key,
-                            egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
-                        }
-                        ).ToList();
                 }
                 if (Age == null)
                 {
@@ -126,22 +117,7 @@ namespace BefolkningPostGres.Controllers
                 if (Age == "0")
                 {
                     egedal1 = _egeContex.CprPrognoseSamlet.Select(a => a._0).ToList();
-                    //egedal1 = _egeContex.CprPrognoseSamlet
-                    //    .Select(a => new { a._0, a.AarMaaned })
-                    //    .OrderByDescending(d => d.AarMaaned).ToList();
-
-                    //egedal1 = (
-                    //from p in _egeContex.CprPrognoseSamlet
-                    //group p by p.AarMaaned into g
-                    //select new
-                    //{
-                    //    //PersonId = g.Key,
-                    //    egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
-                    //}
-                    //).ToList();
-
-                    //egedal1 = _egeContex.CprPrognoseSamlet.Select(item => item._0).ToList();
-
+                    
                 }
                 else if (Age == "1")
                 {
@@ -184,15 +160,20 @@ namespace BefolkningPostGres.Controllers
             {
                 if (Age == null)
                 {
-                    egedal1 = (
-                    from p in _egeContex.CprPrognoseSamlet1
-                    group p by p.AarMaaned into g
-                    select new
-                    {
-                        //PersonId = g.Key,
-                        egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
-                    }
-                    ).ToList();
+                    //egedal1 = _egeContex.CprPrognoseSamlet1.Select(a => a._02 + a._35 + a._616 + a._1724 + a._2564 + a._6574 + a._7584 + a._85).ToList();
+
+                    egedal1 = _egeContex.CprPrognoseSamlet1
+                        .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
+                        .OrderByDescending(d => d.AarMaaned).FirstOrDefault();
+                    //egedal1 = (
+                    //from p in _egeContex.CprPrognoseSamlet1
+                    //group p by p.AarMaaned into g
+                    //select new
+                    //{
+                    //    //PersonId = g.Key,
+                    //    egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
+                    //}
+                    //).ToList();
 
                     //egedal1 = _egeContex.CprPrognoseSamlet1
                     //.Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
@@ -201,19 +182,7 @@ namespace BefolkningPostGres.Controllers
 
                 if (Age == "alle")
                 {
-                    egedal1 = (
-                    from p in _egeContex.CprPrognoseSamlet1
-                    group p by p.AarMaaned into g
-                    select new
-                    {
-                        //PersonId = g.Key,
-                        egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
-                    }
-                    ).ToList();
-
-                    //egedal1 = _egeContex.CprPrognoseSamlet1
-                    //.Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
-                    //.OrderByDescending(d => d.AarMaaned).First();
+                    egedal1 = _egeContex.CprPrognoseSamlet1.Select(a => a._02 + a._35 + a._616 + a._1724 + a._2564 + a._6574 + a._7584 + a._85).ToList();
                 }
 
                 //data = await _rep.GetAll();
@@ -269,15 +238,8 @@ namespace BefolkningPostGres.Controllers
                 }
                 if (Age == "alle")
                 {
-                    egedal1 = (
-                    from p in _egeContex.CprPrognoseSamlet2
-                    group p by p.AarMaaned into g
-                    select new
-                    {
-                        //PersonId = g.Key,
-                        egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
-                    }
-                    ).ToList();
+                    egedal1 = _egeContex.CprPrognoseSamlet2.Select(a => a._02 + a._35 + a._616 + a._1724 + a._2564 + a._6574 + a._7584 + a._85).ToList();
+
                 }
                 //data = await _rep.GetAll();
                 else if (Age == "0")
@@ -325,22 +287,18 @@ namespace BefolkningPostGres.Controllers
             {
                 if (Age == null)
                 {
+                    //egedal1 = _egeContex.CprPrognoseSamlet3                                            
+                    //    .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
+                    //    .OrderByDescending(d => d.AarMaaned).First();
+
                     egedal1 = _egeContex.CprPrognoseSamlet3
-                                            
                         .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
-                        .OrderByDescending(d => d.AarMaaned).First();
+                        .OrderByDescending(d => d.AarMaaned).FirstOrDefault();
                 }
                 if (Age == "alle")
                 {
-                    egedal1 = (
-                    from p in _egeContex.CprPrognoseSamlet3
-                    group p by p.AarMaaned into g
-                    select new
-                    {
-                        //PersonId = g.Key,
-                        egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
-                    }
-                    ).ToList();
+                    egedal1 = _egeContex.CprPrognoseSamlet3.Select(a => a._02 + a._35 + a._616 + a._1724 + a._2564 + a._6574 + a._7584 + a._85).ToList();
+
                 }
                 if (Age == "0")
                 {
@@ -388,20 +346,16 @@ namespace BefolkningPostGres.Controllers
             }
             else if (Area == "smørum")
             {
+                if (Age == null)
+                {
+                    egedal1 = _egeContex.CprPrognoseSamlet4
+                        .Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
+                        .OrderByDescending(d => d.AarMaaned).FirstOrDefault();
+                }
                 if (Age == "alle")
                 {
-                    egedal1 = (
-                   from p in _egeContex.CprPrognoseSamlet4
-                   group p by p.AarMaaned into g
-                   select new
-                   {
-                        //PersonId = g.Key,
-                        egedal = g.Sum(c => c._02 + c._35 + c._616 + c._1724 + c._2564 + c._6574 + c._7584 + c._85)
-                   }
-                   ).ToList();
-                    //egedal1 = _egeContex.CprPrognoseSamlet4
-                    //.Select(a => new { a._0, a._1, a._02, a._35, a._616, a._1724, a._2564, a._6574, a._7584, a._85, a.AarMaaned })
-                    //.OrderByDescending(d => d.AarMaaned).First();
+                    egedal1 = _egeContex.CprPrognoseSamlet4.Select(a => a._02 + a._35 + a._616 + a._1724 + a._2564 + a._6574 + a._7584 + a._85).ToList();
+
                 }
                 if (Age == "0")
                 {
@@ -458,7 +412,7 @@ namespace BefolkningPostGres.Controllers
             if (Age == "nul")
             {
                 
-                egedal = _egeContex.PrognoseHardcodet.OrderBy(c => c.Id).Where(b => b.Omraade == "alle")
+                egedal = _egeContex.PrognoseHardcodet.OrderByDescending(c => c.Id).Where(b => b.Omraade == "alle")
                     .Select(x => new { x.Alder0, x.Alder1, x.Alder02, x.Alder35, x.Alder616, x.Alder1724, x.Alder2564, x.Alder6574, x.Alder7584, x.Alder85, x.Id }).FirstOrDefault();
             }
             if (Age == "alle")

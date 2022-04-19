@@ -38,21 +38,6 @@
                         const BefSum = Object.values(data1)
                         Array.from(BefSum);
 
-                        //let en = data1.map(a => a._0);
-                        //let to = data1.map(a => a._1);
-                        //let tre = data1.map(a => a._02);
-                        //let fire = data1.map(a => a._35);
-                        //let fem = data1.map(a => a._616);
-                        //let seks = data1.map(a => a._1724);
-                        //let syv = data1.map(a => a._2564);
-                        //let otte = data1.map(a => a._6574);
-                        //let ni = data1.map(a => a._7584);
-                        //let ti = data1.map(a => a._85);
-                        //let elleve = data1.map(a => a.aarMaaned);
-                        //let tolv = data1.map(a => a.aarstal);
-                        //let tretten = data1.map(a => a.maaned);
-                        //let fjorten = data1.map(a => a.sum);
-
                         var en = BefSum[0]
                         var to = BefSum[1]
                         var tre = BefSum[2]
@@ -178,8 +163,6 @@
 
 
                 //var value2 = document.getElementById("#VælgAlder").value;
-
-
 
                 $.getJSON("@Html.Raw(@Url.Action("GetCprBefSamlet", "Home"))", { Area: value }, function (data1) {
                     $.getJSON("@Html.Raw(@Url.Action("GetPrognose", "Home"))", { Area: value }, function (data2) {
